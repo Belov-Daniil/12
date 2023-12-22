@@ -18,7 +18,6 @@ def make_matrix():
         for j in range(k):
             n[i].append(random.choice([-1, 1]))
     matrix = np.array(n)
-    print(np.linalg.det(n))
     if abs(np.linalg.det(n)) == 0:
         return make_matrix()
     else:
@@ -27,12 +26,10 @@ def make_matrix():
 
 
 # Функция факториала
-def fuc(n):
-    t = 1
-    for i in range(1, n):
-        t *= i
-    return t
-
+def fuc(prev, n):
+    for i in range(n):
+        prev *= n
+    return prev
 
 # Функция вычисления суммы знакопеременного ряда
 def Line(t):
@@ -44,12 +41,13 @@ def Line(t):
     result = 0.0
     n = 1
     flag = True
+
     # цикл while работает пока в переменной result не будет t знаков после запятой
     while flag:
         try:
             # подсчет следующего значения знакопеременного ряда
             matrix = (matrix * 2) ** (3 * n)
-            result += ((-1) ** n) * (abs(np.linalg.det(matrix)) / fuc(3 * n))
+            result += ((-1) ** n) * (abs(np.linalg.det(matrix)) / fuc(n, 3 * n))
             n += 1
             # проверка колличества знаков после запятой в переменной result
             if len(str(result).split('.')) >= 2:
