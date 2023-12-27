@@ -25,12 +25,6 @@ def make_matrix():
         return matrix
 
 
-# Функция факториала
-def fuc(prev, n):
-    for i in range(n):
-        prev *= n
-    return prev
-
 # Функция вычисления суммы знакопеременного ряда
 def Line(t):
     if t < 0:
@@ -40,15 +34,16 @@ def Line(t):
     matrix = make_matrix()
     result = 0.0
     n = 1
+    fuc = 1
     flag = True
-
     # цикл while работает пока в переменной result не будет t знаков после запятой
     while flag:
         try:
             # подсчет следующего значения знакопеременного ряда
             matrix = (matrix * 2) ** (3 * n)
-            result += ((-1) ** n) * (abs(np.linalg.det(matrix)) / fuc(n, 3 * n))
+            result += ((-1) ** n) * (abs(np.linalg.det(matrix)) / fuc)
             n += 1
+            fuc *= 3*n
             # проверка колличества знаков после запятой в переменной result
             if len(str(result).split('.')) >= 2:
                 if len(str(result).split('.')[1]) > t:
